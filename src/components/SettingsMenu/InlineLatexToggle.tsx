@@ -21,6 +21,7 @@ const InlineLatexToggle = () => {
       label={t('inlineLatex') as string}
       isChecked={isChecked}
       setIsChecked={setIsChecked}
+      isDisabled={false}
     />
   );
 };

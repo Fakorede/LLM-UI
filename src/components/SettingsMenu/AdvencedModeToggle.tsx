@@ -21,6 +21,7 @@ const AdvancedModeToggle = () => {
       label={t('advancedMode') as string}
       isChecked={isChecked}
       setIsChecked={setIsChecked}
+      isDisabled={false}
     />
   );
 };

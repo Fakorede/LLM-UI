@@ -21,6 +21,7 @@ const EnterToSubmitToggle = () => {
       label={t('enterToSubmit') as string}
       isChecked={isChecked}
       setIsChecked={setIsChecked}
+      isDisabled={false}
     />
   );
 };
