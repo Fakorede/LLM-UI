@@ -18,7 +18,7 @@ export interface ChatSlice {
 }
 
 export const createChatSlice: StoreSlice<ChatSlice> = (set, get) => ({
-  allowChats: import.meta.env.VITE_ALLOW_CHATS,
+  allowChats: import.meta.env.VITE_ALLOW_CHATS || true,
   messages: [],
   currentChatIndex: -1,
   generating: false,

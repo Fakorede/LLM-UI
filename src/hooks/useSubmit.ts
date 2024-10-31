@@ -12,6 +12,7 @@ const useSubmit = () => {
   const { t, i18n } = useTranslation('api');
   const error = useStore((state) => state.error);
   const setError = useStore((state) => state.setError);
+  const serverEndpoint = useStore((state) => state.serverEndpoint);
   const apiEndpoint = useStore((state) => state.apiEndpoint);
   const apiKey = useStore((state) => state.apiKey);
   const setGenerating = useStore((state) => state.setGenerating);
@@ -63,6 +64,7 @@ const useSubmit = () => {
     });
 
     setChats(updatedChats);
+    saveChatsToServer(updatedChats);
     setGenerating(true);
 
     try {
@@ -134,6 +136,7 @@ const useSubmit = () => {
             const updatedMessages = updatedChats[currentChatIndex].messages;
             updatedMessages[updatedMessages.length - 1].content += resultString;
             setChats(updatedChats);
+            saveChatsToServer(updatedChats);
           }
         }
         if (useStore.getState().generating) {
@@ -186,6 +189,7 @@ const useSubmit = () => {
         updatedChats[currentChatIndex].title = title;
         updatedChats[currentChatIndex].titleSet = true;
         setChats(updatedChats);
+        saveChatsToServer(updatedChats);
 
         // update tokens used for generating title
         if (countTotalTokens) {
@@ -203,6 +207,23 @@ const useSubmit = () => {
     }
     setGenerating(false);
   };
+
+  async function saveChatsToServer(data: any): Promise<void> {
+    try {
+      let payload = {
+        "user": "893147001",
+        "data": data,
+      };
+
+      await fetch(serverEndpoint, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+    } catch (error) {}
+  }
 
   return { handleSubmit, error };
 };
