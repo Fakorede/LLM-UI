@@ -41,7 +41,7 @@ const Menu = () => {
             <nav className='flex h-full flex-1 flex-col space-y-1 px-2 pt-2'>
               <div className='flex gap-2'>
                 <NewChat />
-                <NewFolder />
+                {/* <NewFolder /> */}
               </div>
               <ChatHistoryList />
               <MenuOptions />

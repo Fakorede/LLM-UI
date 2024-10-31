@@ -98,7 +98,7 @@ const ChatContent = () => {
               </div>
             </div>
           )}
-          <div
+          {/* <div
             className={`mt-4 w-full m-auto  ${
               hideSideMenu
                 ? 'md:max-w-5xl lg:max-w-5xl xl:max-w-6xl'
@@ -112,7 +112,7 @@ const ChatContent = () => {
                 <CloneChat />
               </div>
             )}
-          </div>
+          </div> */}
           <div className='w-full h-36'></div>
         </div>
       </ScrollToBottom>
