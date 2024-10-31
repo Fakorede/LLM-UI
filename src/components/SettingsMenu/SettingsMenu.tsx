@@ -47,10 +47,10 @@ const SettingsMenu = () => {
             <ThemeSwitcher />
             <div className='flex flex-col gap-3'>
               <AutoTitleToggle />
-              {/* <EnterToSubmitToggle /> */}
-              {/* <InlineLatexToggle /> */}
-              {/* <AdvancedModeToggle /> */}
-              {/* <TotalTokenCostToggle /> */}
+              {/* <EnterToSubmitToggle />
+              <InlineLatexToggle />
+              <AdvancedModeToggle />
+              <TotalTokenCostToggle /> */}
             </div>
             {/* <ClearConversation /> */}
             {/* <PromptLibraryMenu /> */}

@@ -29,6 +29,8 @@ const EditView = ({
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const textareaRef = React.createRef<HTMLTextAreaElement>();
 
+  const allowChats = useStore((state) => state.allowChats);
+
   const { t } = useTranslation();
 
   const resetTextAreaHeight = () => {
@@ -43,6 +45,11 @@ const EditView = ({
 
     if (e.key === 'Enter' && !isMobile && !e.nativeEvent.isComposing) {
       const enterToSubmit = useStore.getState().enterToSubmit;
+
+      const hasText = e.currentTarget.value.trim().length > 0;
+      if (!hasText || !allowChats) {
+        e.preventDefault();return;
+      }
 
       if (e.ctrlKey && e.shiftKey) {
         e.preventDefault();
@@ -147,6 +154,7 @@ const EditView = ({
         setIsModalOpen={setIsModalOpen}
         setIsEdit={setIsEdit}
         _setContent={_setContent}
+        content={_content}
       />
       {isModalOpen && (
         <PopupModal
@@ -168,6 +176,7 @@ const EditViewButtons = memo(
     setIsModalOpen,
     setIsEdit,
     _setContent,
+    content
   }: {
     sticky?: boolean;
     handleGenerate: () => void;
@@ -175,10 +184,12 @@ const EditViewButtons = memo(
     setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
     setIsEdit: React.Dispatch<React.SetStateAction<boolean>>;
     _setContent: React.Dispatch<React.SetStateAction<string>>;
+    content: string,
   }) => {
     const { t } = useTranslation();
     const generating = useStore.getState().generating;
     const advancedMode = useStore((state) => state.advancedMode);
+    const allowChats = useStore((state) => state.allowChats);
 
     return (
       <div className='flex'>
@@ -190,6 +201,7 @@ const EditViewButtons = memo(
               }`}
               onClick={handleGenerate}
               aria-label={t('generate') as string}
+              disabled={!content || !allowChats}
             >
               <div className='flex items-center justify-center gap-2'>
                 {t('generate')}
@@ -203,6 +215,7 @@ const EditViewButtons = memo(
               onClick={() => {
                 !generating && setIsModalOpen(true);
               }}
+              disabled={!content || !allowChats}
             >
               <div className='flex items-center justify-center gap-2'>
                 {t('generate')}

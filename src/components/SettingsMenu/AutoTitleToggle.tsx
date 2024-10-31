@@ -21,6 +21,7 @@ const AutoTitleToggle = () => {
       label={t('autoTitle') as string}
       isChecked={isChecked}
       setIsChecked={setIsChecked}
+      isDisabled={true}
     />
   );
 };

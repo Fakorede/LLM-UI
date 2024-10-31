@@ -3,15 +3,18 @@ import React from 'react';
 const Toggle = ({
   label,
   isChecked,
+  isDisabled,
   setIsChecked,
 }: {
   label: string;
   isChecked: boolean;
+  isDisabled: boolean;
   setIsChecked: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
   return (
     <label className='relative flex items-center cursor-pointer'>
       <input
+        disabled={isDisabled}
         type='checkbox'
         className='sr-only peer'
         checked={isChecked}

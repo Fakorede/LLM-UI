@@ -2,6 +2,7 @@ import { StoreSlice } from './store';
 import { ChatInterface, FolderCollection, MessageInterface } from '@type/chat';
 
 export interface ChatSlice {
+  allowChats: boolean,
   messages: MessageInterface[];
   chats?: ChatInterface[];
   currentChatIndex: number;
@@ -17,11 +18,18 @@ export interface ChatSlice {
 }
 
 export const createChatSlice: StoreSlice<ChatSlice> = (set, get) => ({
+  allowChats: import.meta.env.VITE_ALLOW_CHATS,
   messages: [],
   currentChatIndex: -1,
   generating: false,
   error: '',
   folders: {},
+  setAllowChats: (allowChats: boolean) => {
+    set((prev: ChatSlice) => ({
+      ...prev,
+      allowChats: allowChats,
+    }));
+  },
   setMessages: (messages: MessageInterface[]) => {
     set((prev: ChatSlice) => ({
       ...prev,
