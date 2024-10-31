@@ -210,7 +210,7 @@ const EditViewButtons = memo(
             </button>
           )}
 
-          <button
+          {/* <button
             className={`btn relative mr-2 ${
               sticky
                 ? `btn-neutral ${
@@ -224,7 +224,7 @@ const EditViewButtons = memo(
             <div className='flex items-center justify-center gap-2'>
               {t('save')}
             </div>
-          </button>
+          </button> */}
 
           {sticky || (
             <button
