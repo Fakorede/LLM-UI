@@ -10,6 +10,7 @@ const useInitialiseNewChat = () => {
 
   const initialiseNewChat = async () => {
     let conversations: any[] = [];
+    let chats: any[] = [];
 
     await fetch("/conversations.csv")
       .then(response => response.text())
@@ -23,11 +24,9 @@ const useInitialiseNewChat = () => {
         });
     });
 
-    setChats([
-      generateDefaultChat(conversations[0].title, "", conversations[0].message),
-      generateDefaultChat(conversations[1].title, "", conversations[1].message),
-      generateDefaultChat(conversations[2].title, "", conversations[2].message),
-    ]);
+    conversations.forEach(obj => chats.push(generateDefaultChat(obj.title, "", obj.message)));
+
+    setChats(chats);
     setCurrentChatIndex(0);
   };
 
