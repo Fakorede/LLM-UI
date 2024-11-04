@@ -155,7 +155,7 @@ export const generateDefaultChat = (
   prompt?: string,
 ): ChatInterface => ({
   id: uuidv4(),
-  title: title ? title : `New Chat ${uuidv4()}`,
+  title: title ? title : "New Chat",
   messages:
     useStore.getState().defaultSystemMessage.length > 0
       ? [
