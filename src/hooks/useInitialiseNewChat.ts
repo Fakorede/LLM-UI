@@ -8,7 +8,10 @@ const useInitialiseNewChat = () => {
   const setCurrentChatIndex = useStore((state) => state.setCurrentChatIndex);
 
   const initialiseNewChat = () => {
-    setChats([generateDefaultChat()]);
+    setChats([
+      generateDefaultChat(),
+      generateDefaultChat(),
+    ]);
     setCurrentChatIndex(0);
   };
 
