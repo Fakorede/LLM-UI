@@ -138,23 +138,24 @@ const ContentView = memo(
         <div className='flex justify-end gap-2 w-full mt-2'>
           {isDelete || (
             <>
-              {!useStore.getState().generating &&
+              {/* {!useStore.getState().generating &&
                 role === 'assistant' &&
                 messageIndex === lastMessageIndex && (
                   <RefreshButton onClick={handleRefresh} />
-                )}
-              {messageIndex !== 0 && <UpButton onClick={handleMoveUp} />}
+                )
+                } */}
+              {/* {messageIndex !== 0 && <UpButton onClick={handleMoveUp} />}
               {messageIndex !== lastMessageIndex && (
                 <DownButton onClick={handleMoveDown} />
-              )}
+              )} */}
 
-              <MarkdownModeButton />
+              {/* <MarkdownModeButton /> */}
               <CopyButton onClick={handleCopy} />
-              <EditButton setIsEdit={setIsEdit} />
-              <DeleteButton setIsDelete={setIsDelete} />
+              {/* <EditButton setIsEdit={setIsEdit} />
+              <DeleteButton setIsDelete={setIsDelete} /> */}
             </>
           )}
-          {isDelete && (
+          {/* {isDelete && (
             <>
               <button
                 className='p-1 hover:text-white'
@@ -171,7 +172,7 @@ const ContentView = memo(
                 <TickIcon />
               </button>
             </>
-          )}
+          )} */}
         </div>
       </>
     );
