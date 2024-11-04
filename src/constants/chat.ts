@@ -151,13 +151,17 @@ export const _defaultChatConfig: ConfigInterface = {
 
 export const generateDefaultChat = (
   title?: string,
-  folder?: string
+  folder?: string,
+  prompt?: string,
 ): ChatInterface => ({
   id: uuidv4(),
-  title: title ? title : 'New Chat',
+  title: title ? title : `New Chat ${uuidv4()}`,
   messages:
     useStore.getState().defaultSystemMessage.length > 0
-      ? [{ role: 'system', content: useStore.getState().defaultSystemMessage }]
+      ? [
+        { role: 'system', content: useStore.getState().defaultSystemMessage },
+        { role: 'assistant', content: prompt ? prompt : 'Hi, what can I help with?' }
+      ]
       : [],
   config: { ...useStore.getState().defaultChatConfig },
   titleSet: false,

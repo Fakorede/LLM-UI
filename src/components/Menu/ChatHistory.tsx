@@ -127,7 +127,7 @@ const ChatHistory = React.memo(
             />
           )}
         </div>
-        {active && (
+        {/* {active && (
           <div className='absolute flex right-1 z-10 text-gray-300 visible'>
             {isDelete || isEdit ? (
               <>
@@ -165,7 +165,7 @@ const ChatHistory = React.memo(
               </>
             )}
           </div>
-        )}
+        )} */}
       </a>
     );
   }
