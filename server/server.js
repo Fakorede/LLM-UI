@@ -21,7 +21,7 @@ if (process.env.SERVER_ENVIRONMENT == "production") {
 app.use(express.json());
 
 
-app.post("/save-chats", (req, res) => {
+app.post("/api/save-chats", (req, res) => {
   const {user, data} = req.body;
 
   // Define the file path for saving the JSON data
