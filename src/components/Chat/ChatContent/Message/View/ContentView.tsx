@@ -26,10 +26,12 @@ import { codeLanguageSubset } from '@constants/chat';
 import RefreshButton from './Button/RefreshButton';
 import UpButton from './Button/UpButton';
 import DownButton from './Button/DownButton';
+import InfoButton from './Button/InfoButton';
 import CopyButton from './Button/CopyButton';
 import EditButton from './Button/EditButton';
 import DeleteButton from './Button/DeleteButton';
 import MarkdownModeButton from './Button/MarkdownModeButton';
+import SettingsMenu from '@components/SettingsMenu';
 
 import CodeBlock from '../CodeBlock';
 
@@ -151,6 +153,7 @@ const ContentView = memo(
 
               {/* <MarkdownModeButton /> */}
               <CopyButton onClick={handleCopy} />
+              <InfoButton />
               {/* <EditButton setIsEdit={setIsEdit} />
               <DeleteButton setIsDelete={setIsDelete} /> */}
             </>

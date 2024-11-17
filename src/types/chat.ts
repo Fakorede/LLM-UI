@@ -16,6 +16,7 @@ export interface ChatInterface {
   messages: MessageInterface[];
   config: ConfigInterface;
   titleSet: boolean;
+  moreInfo?: string,
 }
 
 export interface ConfigInterface {

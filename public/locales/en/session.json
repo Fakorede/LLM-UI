@@ -1,0 +1,12 @@
+{
+  "apiKey": {
+    "howTo": "Get your personal API key <0>here</0>.",
+    "inputLabel": "API Key"
+  },
+  "session": {
+    "userIdLabel": "LSU Email",
+    "userKeyLabel": "Session Key"
+  },
+  "sessionWarning": "Missing session info.",
+  "sessionWarning2": "Incorrect session info provided."
+}
