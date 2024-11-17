@@ -153,6 +153,7 @@ export const generateDefaultChat = (
   title?: string,
   folder?: string,
   prompt?: string,
+  moreInfo?: string,
 ): ChatInterface => ({
   id: uuidv4(),
   title: title ? title : "New Chat",
@@ -160,12 +161,14 @@ export const generateDefaultChat = (
     useStore.getState().defaultSystemMessage.length > 0
       ? [
         { role: 'system', content: useStore.getState().defaultSystemMessage },
-        { role: 'assistant', content: prompt ? prompt : 'Hi, what can I help with?' }
+        // { role: 'user', content: prompt ? prompt : '' },
+        { role: 'assistant', content: 'Hi, what can I help with?' },
       ]
       : [],
   config: { ...useStore.getState().defaultChatConfig },
   titleSet: false,
   folder,
+  moreInfo,
 });
 
 export const codeLanguageSubset = [
