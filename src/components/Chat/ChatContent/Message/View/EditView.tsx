@@ -9,6 +9,7 @@ import { ChatInterface } from '@type/chat';
 import PopupModal from '@components/PopupModal';
 import TokenCount from '@components/TokenCount';
 import CommandPrompt from '../CommandPrompt';
+import InfoButton from './Button/InfoButton';
 
 const EditView = ({
   content,
@@ -30,6 +31,13 @@ const EditView = ({
   const textareaRef = React.createRef<HTMLTextAreaElement>();
 
   const allowChats = useStore((state) => state.allowChats);
+
+  const userId = useStore((state) => state.userId);
+  const userKey = useStore((state) => state.userKey);
+
+  const setToastStatus = useStore((state) => state.setToastStatus);
+  const setToastMessage = useStore((state) => state.setToastMessage);
+  const setToastShow = useStore((state) => state.setToastShow);
 
   const { t } = useTranslation();
 
@@ -89,6 +97,13 @@ const EditView = ({
 
   const { handleSubmit } = useSubmit();
   const handleGenerate = () => {
+    if (!userId || !userKey) {
+      setToastMessage("Please provide your session information");
+      setToastShow(true);
+      setToastStatus('error');
+      return;
+    }
+
     if (useStore.getState().generating) return;
     const updatedChats: ChatInterface[] = JSON.parse(
       JSON.stringify(useStore.getState().chats)
@@ -194,6 +209,10 @@ const EditViewButtons = memo(
     return (
       <div className='flex'>
         <div className='flex-1 text-center mt-2 flex justify-center'>
+          <div className='mr-2 flex items-center justify-center'>
+            <InfoButton />
+          </div>
+
           {sticky && (
             <button
               className={`btn relative mr-2 btn-primary ${
