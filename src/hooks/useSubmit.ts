@@ -19,6 +19,7 @@ const useSubmit = () => {
   const generating = useStore((state) => state.generating);
   const currentChatIndex = useStore((state) => state.currentChatIndex);
   const setChats = useStore((state) => state.setChats);
+  const userId = useStore((state) => state.userId);
 
   const generateTitle = async (
     message: MessageInterface[]
@@ -211,7 +212,7 @@ const useSubmit = () => {
   async function saveChatsToServer(data: any): Promise<void> {
     try {
       let payload = {
-        "user": "893147001",
+        "user": userId,
         "data": data,
       };
 
