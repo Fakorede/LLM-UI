@@ -19,7 +19,7 @@ export interface ChatInterface {
   moreInfo?: string,
 }
 
-export interface autoTaskInterface {
+export interface TaskInterface {
   title: string;
   prompt: string;
   additionalPrompt: string;
