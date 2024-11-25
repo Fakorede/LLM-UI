@@ -53,7 +53,7 @@ const useSubmit = () => {
     return data.choices[0].message.content;
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (user?: String) => {
     const chats = useStore.getState().chats;
     if (generating || !chats) return;
 
@@ -65,7 +65,7 @@ const useSubmit = () => {
     });
 
     setChats(updatedChats);
-    saveChatsToServer(updatedChats);
+    // saveChatsToServer(updatedChats, user?user:'');
     setGenerating(true);
 
     try {
@@ -137,7 +137,7 @@ const useSubmit = () => {
             const updatedMessages = updatedChats[currentChatIndex].messages;
             updatedMessages[updatedMessages.length - 1].content += resultString;
             setChats(updatedChats);
-            saveChatsToServer(updatedChats);
+            saveChatsToServer(updatedChats, user?user:'');
           }
         }
         if (useStore.getState().generating) {
@@ -190,7 +190,7 @@ const useSubmit = () => {
         updatedChats[currentChatIndex].title = title;
         updatedChats[currentChatIndex].titleSet = true;
         setChats(updatedChats);
-        saveChatsToServer(updatedChats);
+        // saveChatsToServer(updatedChats, user?user:'');
 
         // update tokens used for generating title
         if (countTotalTokens) {
@@ -209,10 +209,10 @@ const useSubmit = () => {
     setGenerating(false);
   };
 
-  async function saveChatsToServer(data: any): Promise<void> {
+  async function saveChatsToServer(data: any, user: String): Promise<void> {
     try {
       let payload = {
-        "user": userId,
+        "user": user?user:userId,
         "data": data,
       };
 
