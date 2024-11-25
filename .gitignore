@@ -27,3 +27,4 @@ release/
 
 .env
 users.csv
+server/conversations/

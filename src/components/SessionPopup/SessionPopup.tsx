@@ -5,6 +5,8 @@ import Papa from 'papaparse';
 
 import PopupModal from '@components/PopupModal';
 import CrossIcon from '@icon/CrossIcon';
+import useSubmit from '@hooks/useSubmit';
+import { ChatInterface } from '@type/chat';
 
 const SessionPopup = () => {
   const { t } = useTranslation(['main', 'session']);
@@ -23,6 +25,24 @@ const SessionPopup = () => {
     !userKey && !userId
   );
   const [error, setError] = useState<string>('');
+
+  const { handleSubmit } = useSubmit();
+
+  const tasks = useStore((state) => state.tasks);
+  const setChats = useStore((state) => state.setChats);
+
+  const generateChat = (userId?: String) => {
+    const updatedChats: ChatInterface[] = JSON.parse(
+      JSON.stringify(useStore.getState().chats)
+    );
+
+    updatedChats.forEach((chats, idx) => {
+      chats.messages.push({ role: 'user', content: tasks ? tasks[idx].prompt : '' })
+    });
+    setChats(updatedChats);
+
+    handleSubmit(userId?userId:'');
+  }
 
   const handleConfirm = async () => {
     if (_userId.length === 0 || _userKey.length === 0) {
@@ -48,6 +68,9 @@ const SessionPopup = () => {
         setError('');
         setUserId(_userId);
         setUserKey(_userKey);
+
+        generateChat(user.email);
+
         setIsModalOpen(false);
       } else {
         setError(t('sessionWarning2', { ns: 'session' }) as string);

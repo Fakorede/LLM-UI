@@ -161,7 +161,6 @@ export const generateDefaultChat = (
     useStore.getState().defaultSystemMessage.length > 0
       ? [
         { role: 'system', content: useStore.getState().defaultSystemMessage },
-        // { role: 'user', content: prompt ? prompt : '' },
         { role: 'assistant', content: 'Hi, what can I help with?' },
       ]
       : [],

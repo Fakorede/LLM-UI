@@ -19,6 +19,12 @@ export interface ChatInterface {
   moreInfo?: string,
 }
 
+export interface autoTaskInterface {
+  title: string;
+  prompt: string;
+  additionalPrompt: string;
+}
+
 export interface ConfigInterface {
   model: ModelOptions;
   max_tokens: number;

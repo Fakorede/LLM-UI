@@ -1,5 +1,5 @@
 import { StoreSlice } from './store';
-import { ChatInterface, FolderCollection, MessageInterface } from '@type/chat';
+import { ChatInterface, FolderCollection, MessageInterface, TaskInterface } from '@type/chat';
 
 export interface ChatSlice {
   allowChats: boolean,
@@ -9,8 +9,10 @@ export interface ChatSlice {
   generating: boolean;
   error: string;
   folders: FolderCollection;
+  tasks?: TaskInterface[];
   setMessages: (messages: MessageInterface[]) => void;
   setChats: (chats: ChatInterface[]) => void;
+  setTasks: (tasks: TaskInterface[]) => void;
   setCurrentChatIndex: (currentChatIndex: number) => void;
   setGenerating: (generating: boolean) => void;
   setError: (error: string) => void;
@@ -24,6 +26,7 @@ export const createChatSlice: StoreSlice<ChatSlice> = (set, get) => ({
   generating: false,
   error: '',
   folders: {},
+  tasks: [],
   setAllowChats: (allowChats: boolean) => {
     set((prev: ChatSlice) => ({
       ...prev,
@@ -40,6 +43,12 @@ export const createChatSlice: StoreSlice<ChatSlice> = (set, get) => ({
     set((prev: ChatSlice) => ({
       ...prev,
       chats: chats,
+    }));
+  },
+  setTasks: (tasks: TaskInterface[]) => {
+    set((prev: ChatSlice) => ({
+      ...prev,
+      tasks: tasks,
     }));
   },
   setCurrentChatIndex: (currentChatIndex: number) => {

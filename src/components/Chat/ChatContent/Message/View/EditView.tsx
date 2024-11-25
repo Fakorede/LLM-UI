@@ -98,7 +98,7 @@ const EditView = ({
   const { handleSubmit } = useSubmit();
   const handleGenerate = () => {
     if (!userId || !userKey) {
-      setToastMessage("Please provide your session information");
+      setToastMessage("Please reload the page and provide session information");
       setToastShow(true);
       setToastStatus('error');
       return;
