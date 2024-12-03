@@ -31,7 +31,7 @@ const SessionPopup = () => {
   const tasks = useStore((state) => state.tasks);
   const setChats = useStore((state) => state.setChats);
 
-  const generateChat = (userId?: String) => {
+  const generateChat = async (userId?: String) => {
     const updatedChats: ChatInterface[] = JSON.parse(
       JSON.stringify(useStore.getState().chats)
     );
@@ -41,7 +41,9 @@ const SessionPopup = () => {
     });
     setChats(updatedChats);
 
-    handleSubmit(userId?userId:'');
+    for (let index = 0; index < updatedChats.length; index++) {
+      await handleSubmit(userId?userId:'', index)
+    }
   }
 
   const handleConfirm = async () => {

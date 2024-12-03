@@ -17,7 +17,7 @@ const useSubmit = () => {
   const apiKey = useStore((state) => state.apiKey);
   const setGenerating = useStore((state) => state.setGenerating);
   const generating = useStore((state) => state.generating);
-  const currentChatIndex = useStore((state) => state.currentChatIndex);
+  let currentChatIndex = useStore((state) => state.currentChatIndex);
   const setChats = useStore((state) => state.setChats);
   const userId = useStore((state) => state.userId);
 
@@ -53,9 +53,13 @@ const useSubmit = () => {
     return data.choices[0].message.content;
   };
 
-  const handleSubmit = async (user?: String) => {
+  const handleSubmit = async (user?: String, index?: number) => {
     const chats = useStore.getState().chats;
     if (generating || !chats) return;
+
+    if (index !== undefined) {
+      currentChatIndex = index;
+    }
 
     const updatedChats: ChatInterface[] = JSON.parse(JSON.stringify(chats));
 
