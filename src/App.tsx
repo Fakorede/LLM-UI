@@ -14,6 +14,7 @@ import Toast from '@components/Toast';
 function App() {
   const initialiseNewChat = useInitialiseNewChat();
   const setChats = useStore((state) => state.setChats);
+  const setTasks = useStore((state) => state.setTasks);
   const setTheme = useStore((state) => state.setTheme);
   const setApiKey = useStore((state) => state.setApiKey);
   const setCurrentChatIndex = useStore((state) => state.setCurrentChatIndex);
@@ -70,6 +71,29 @@ function App() {
         !(currentChatIndex >= 0 && currentChatIndex < chats.length)
       ) {
         setCurrentChatIndex(0);
+      }
+
+      if (chats && chats.length > 0) {
+        const rawData = localStorage.getItem('free-chat-gpt')
+
+        if (!rawData) return;
+        
+        const parsedData = JSON.parse(rawData);
+        const tasks = parsedData?.state?.tasks;
+        const tasksChat = parsedData?.state?.chats;
+
+        if (tasks && tasks.length > 3) {
+          tasks[3].additionalPrompt = "Input are two strings a and b consisting only of 1s and 0s.\nPerform binary XOR on these inputs and return result also as a string.\n\n\nTest Cases: \n\n('111000', '101010') == '010010' \n\n('1', '1') == '0' \n\n('0101', '0000') == '0101' \n\n";
+        }
+
+        if (tasksChat && tasksChat.length > 3) {
+          tasksChat[3].moreInfo = "Input are two strings a and b consisting only of 1s and 0s.\nPerform binary XOR on these inputs and return result also as a string.\n\n\nTest Cases: \n\n('111000', '101010') == '010010' \n\n('1', '1') == '0' \n\n('0101', '0000') == '0101' \n\n";
+        }
+
+        localStorage.setItem('free-chat-gpt', JSON.stringify(parsedData));
+
+        setTasks(tasks);
+        setChats(tasksChat);
       }
     }
   }, []);
