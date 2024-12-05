@@ -90,6 +90,20 @@ function App() {
           tasksChat[3].moreInfo = "Input are two strings a and b consisting only of 1s and 0s.\nPerform binary XOR on these inputs and return result also as a string.\n\n\nTest Cases: \n\n('111000', '101010') == '010010' \n\n('1', '1') == '0' \n\n('0101', '0000') == '0101' \n\n";
         }
 
+        if (tasks && tasks.length > 10) {
+          tasks[10].additionalPrompt = 
+            "This function takes a list l and returns a list l' such that l' is identical to l in the indicies that are not divisible by three, while its values at the indicies that are divisible by three are equal to the values of the corresponding indicies of l, but sorted" + "\n\n" +
+            "Test cases:" + "\n" +
+            "tuple(sort_third([5, 6, 3, 4, 8, 9, 2])) == tuple([2, 6, 3, 4, 8, 9, 5])\ntuple(sort_third([5, 8, 3, 4, 6, 9, 2])) == tuple([2, 8, 3, 4, 6, 9, 5])\ntuple(sort_third([5, 6, 9, 4, 8, 3, 2])) == tuple([2, 6, 9, 4, 8, 3, 5])\ntuple(sort_third([5, 6, 3, 4, 8, 9, 2, 1])) == tuple([2, 6, 3, 4, 8, 9, 5, 1])";
+        }
+        
+        if (tasksChat && tasksChat.length > 10) {
+          tasksChat[10].moreInfo = 
+            "This function takes a list l and returns a list l' such that l' is identical to l in the indicies that are not divisible by three, while its values at the indicies that are divisible by three are equal to the values of the corresponding indicies of l, but sorted" + "\n\n" +
+            "Test cases:" + "\n" +
+            "tuple(sort_third([5, 6, 3, 4, 8, 9, 2])) == tuple([2, 6, 3, 4, 8, 9, 5])\ntuple(sort_third([5, 8, 3, 4, 6, 9, 2])) == tuple([2, 8, 3, 4, 6, 9, 5])\ntuple(sort_third([5, 6, 9, 4, 8, 3, 2])) == tuple([2, 6, 9, 4, 8, 3, 5])\ntuple(sort_third([5, 6, 3, 4, 8, 9, 2, 1])) == tuple([2, 6, 3, 4, 8, 9, 5, 1])";
+        }
+
         localStorage.setItem('free-chat-gpt', JSON.stringify(parsedData));
 
         setTasks(tasks);
