@@ -11,16 +11,20 @@ const PORT = process.env.SERVER_PORT || 3000;
 
 // Middleware
 if (process.env.SERVER_ENVIRONMENT == "production") {
-    app.use(cors({
-        origin: URL
-    }));
+  //app.use(cors({
+    //  origin: URL
+  //}));
+  app.use(cors());
 } else {
-    app.use(cors());
+   app.use(cors());
 }
 
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ limit: '50mb', extended: true }));
 
+app.get("/api/test", (req, res) => {
+  return res.send("Hello, it works!");
+});
 
 app.post("/api/save-chats", (req, res) => {
   const {user, data} = req.body;
