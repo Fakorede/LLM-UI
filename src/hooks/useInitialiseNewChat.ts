@@ -118,10 +118,8 @@ const useInitialiseNewChat = () => {
       {
         title: "Problem 10",
         prompt: "round(find_zero([1, 2]), 2), -0.5, write code for it in Ruby",
-        additionalPrompt: "round(find_zero([1, 2]), 2), -0.5, write code for it in Ruby" + "\n\n" +
-        "Test cases:" + "\n" +
-        "Evaluates polynomial with coefficients xs at point x.\n    return xs[0] + xs[1] * x + xs[1] * x^2 + .... xs[n] * x^n\n    \"\"\"\n    return sum([coeff * math.pow(x, i) for i, coeff in enumerate(xs)])\n\n\ndef find_zero(xs: list):\n    \"\"\" xs are coefficients of a polynomial.\n    find_zero find x such that poly(x) = 0.\n    find_zero returns only only zero point, even if there are many.\n    Moreover, find_zero only takes list xs having even number of coefficients\n    and largest non zero coefficient as it guarantees\n    a solution.\n\n\nTest Cases: import math\n import random\n  rng = random.Random(42)\n  import copy\n for _ in range(100):\n ncoeff = 2 * rng.randint(1, 4)\n  coeffs = []\n for _ in range(ncoeff):\n coeff = rng.randint(-10, 10)\n if coeff == 0:\n coeff = 1\n coeffs.append(coeff)\n  solution = find_zero(copy.deepcopy(coeffs))\n assert math.fabs(poly(coeffs, solution)) \u003C 1e-4\n\n"
-        + "\n" + "",
+        additionalPrompt: "poly(xs: list, x: float):\n    \"\"\"\n    Evaluates polynomial with coefficients xs at point x.\n    return xs[0] + xs[1] * x + xs[1] * x^2 + .... xs[n] * x^n\n    \"\"\"\n    return sum([coeff * math.pow(x, i) for i, coeff in enumerate(xs)])\n\n find_zero(xs: list):\n    \"\"\" xs are coefficients of a polynomial.\n    find_zero find x such that poly(x) = 0.\n    find_zero returns only only zero point, even if there are many.\n    Moreover, find_zero only takes list xs having even number of coefficients\n    and largest non zero coefficient as it guarantees\n    a solution.\n\"\"\"\n"
+          + "\nTESTCASE:\n import math\n  import random\n   rng = random.Random(42)\n    import copy\n    for _ in range(100):\n   ncoeff = 2 * rng.randint(1, 4)\n    coeffs = []\n    for _ in range(ncoeff):\n     coeff = rng.randint(-10, 10)\n   if coeff == 0:\n  coeff = 1\n  coeffs.append(coeff)\n  solution = find_zero(copy.deepcopy(coeffs))\n  assert math.fabs(poly(coeffs, solution)) < 1e-4\n\n"
       },
       {
         title: "Problem 11",
@@ -133,8 +131,8 @@ const useInitialiseNewChat = () => {
       {
         title: "Problem 12",
         prompt: "encode_cyclic(abcdefgh) = (bcaefdgh), decode_cyclic(bcaefdgh) = (abcdefgh), write code for it in Ruby",
-        additionalPrompt: "returns encoded string by cycling groups of three characters.\n    \"\"\"\n    # split string to groups. Each of length 3.\n    groups = [s[(3 * i):min((3 * i + 3), len(s))] for i in range((len(s) + 2) // 3)]\n    # cycle elements in each group. Unless group has fewer elements than 3.\n    groups = [(group[1:] + group[0]) if len(group) == 3 else group for group in groups]\n    return \"\".join(groups)\n\n\ndef decode_cyclic(s: str):\n    \"\"\"\n    takes as input string encoded with encode_cyclic function. Returns decoded string.\n\n\nTest Cases:  from random import randint, choice\n    import string\n\n    letters = string.ascii_lowercase\n    for _ in range(100):\n        str = ''.join(choice(letters) for i in range(randint(10, 20)))\n        encoded_str = encode_cyclic(str)\n        assert encode_cyclic(encoded_str) == str\n\n\n\n" +
-        ""
+        additionalPrompt: "def encode_cyclic(s: str):\n    \"\"\"\n    returns encoded string by cycling groups of three characters.\n    \"\"\"\n    # split string to groups. Each of length 3.\n    groups = [s[(3 * i):min((3 * i + 3), len(s))] for i in range((len(s) + 2) // 3)]\n    # cycle elements in each group. Unless group has fewer elements than 3.\n    groups = [(group[1:] + group[0]) if len(group) == 3 else group for group in groups]\n    return \"\".join(groups)\n\ndef decode_cyclic(s: str):\n    \"\"\"\n    takes as input string encoded with encode_cyclic function. Returns decoded string.\n    \"\"\"\n"
+          + "\n\TESTCASE:\ndef check(candidate):\n    from random import randint, choice\n    import string\n\n    letters = string.ascii_lowercase\n    for _ in range(100):\n        str = ''.join(choice(letters) for i in range(randint(10, 20)))\n        encoded_str = encode_cyclic(str)\n        assert decode_cyclic(encoded_str) == str\n\n"
       },
       {
         title: "Problem 13",
