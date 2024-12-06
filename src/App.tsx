@@ -90,6 +90,16 @@ function App() {
           tasksChat[3].moreInfo = "Input are two strings a and b consisting only of 1s and 0s.\nPerform binary XOR on these inputs and return result also as a string.\n\n\nTest Cases: \n\n('111000', '101010') == '010010' \n\n('1', '1') == '0' \n\n('0101', '0000') == '0101' \n\n";
         }
 
+        if (tasks && tasks.length > 9) {
+          tasks[9].additionalPrompt = "poly(xs: list, x: float):\n    \"\"\"\n    Evaluates polynomial with coefficients xs at point x.\n    return xs[0] + xs[1] * x + xs[1] * x^2 + .... xs[n] * x^n\n    \"\"\"\n    return sum([coeff * math.pow(x, i) for i, coeff in enumerate(xs)])\n\n find_zero(xs: list):\n    \"\"\" xs are coefficients of a polynomial.\n    find_zero find x such that poly(x) = 0.\n    find_zero returns only only zero point, even if there are many.\n    Moreover, find_zero only takes list xs having even number of coefficients\n    and largest non zero coefficient as it guarantees\n    a solution.\n\"\"\"\n"
+            + "\nTESTCASE:\n import math\n  import random\n   rng = random.Random(42)\n    import copy\n    for _ in range(100):\n   ncoeff = 2 * rng.randint(1, 4)\n    coeffs = []\n    for _ in range(ncoeff):\n     coeff = rng.randint(-10, 10)\n   if coeff == 0:\n  coeff = 1\n  coeffs.append(coeff)\n  solution = find_zero(copy.deepcopy(coeffs))\n  assert math.fabs(poly(coeffs, solution)) < 1e-4\n\n"
+        }
+
+        if (tasksChat && tasksChat.length > 9) {
+          tasksChat[9].moreInfo = "poly(xs: list, x: float):\n    \"\"\"\n    Evaluates polynomial with coefficients xs at point x.\n    return xs[0] + xs[1] * x + xs[1] * x^2 + .... xs[n] * x^n\n    \"\"\"\n    return sum([coeff * math.pow(x, i) for i, coeff in enumerate(xs)])\n\n find_zero(xs: list):\n    \"\"\" xs are coefficients of a polynomial.\n    find_zero find x such that poly(x) = 0.\n    find_zero returns only only zero point, even if there are many.\n    Moreover, find_zero only takes list xs having even number of coefficients\n    and largest non zero coefficient as it guarantees\n    a solution.\n\"\"\"\n"
+            + "\nTESTCASE:\n import math\n  import random\n   rng = random.Random(42)\n    import copy\n    for _ in range(100):\n   ncoeff = 2 * rng.randint(1, 4)\n    coeffs = []\n    for _ in range(ncoeff):\n     coeff = rng.randint(-10, 10)\n   if coeff == 0:\n  coeff = 1\n  coeffs.append(coeff)\n  solution = find_zero(copy.deepcopy(coeffs))\n  assert math.fabs(poly(coeffs, solution)) < 1e-4\n\n"
+        }
+
         if (tasks && tasks.length > 10) {
           tasks[10].additionalPrompt = 
             "This function takes a list l and returns a list l' such that l' is identical to l in the indicies that are not divisible by three, while its values at the indicies that are divisible by three are equal to the values of the corresponding indicies of l, but sorted" + "\n\n" +
@@ -102,6 +112,18 @@ function App() {
             "This function takes a list l and returns a list l' such that l' is identical to l in the indicies that are not divisible by three, while its values at the indicies that are divisible by three are equal to the values of the corresponding indicies of l, but sorted" + "\n\n" +
             "Test cases:" + "\n" +
             "tuple(sort_third([5, 6, 3, 4, 8, 9, 2])) == tuple([2, 6, 3, 4, 8, 9, 5])\ntuple(sort_third([5, 8, 3, 4, 6, 9, 2])) == tuple([2, 8, 3, 4, 6, 9, 5])\ntuple(sort_third([5, 6, 9, 4, 8, 3, 2])) == tuple([2, 6, 9, 4, 8, 3, 5])\ntuple(sort_third([5, 6, 3, 4, 8, 9, 2, 1])) == tuple([2, 6, 3, 4, 8, 9, 5, 1])";
+        }
+
+        if (tasks && tasks.length > 11) {
+          tasks[11].additionalPrompt = 
+            "def encode_cyclic(s: str):\n    \"\"\"\n    returns encoded string by cycling groups of three characters.\n    \"\"\"\n    # split string to groups. Each of length 3.\n    groups = [s[(3 * i):min((3 * i + 3), len(s))] for i in range((len(s) + 2) // 3)]\n    # cycle elements in each group. Unless group has fewer elements than 3.\n    groups = [(group[1:] + group[0]) if len(group) == 3 else group for group in groups]\n    return \"\".join(groups)\n\ndef decode_cyclic(s: str):\n    \"\"\"\n    takes as input string encoded with encode_cyclic function. Returns decoded string.\n    \"\"\"\n"
+            + "\n\TESTCASE:\ndef check(candidate):\n    from random import randint, choice\n    import string\n\n    letters = string.ascii_lowercase\n    for _ in range(100):\n        str = ''.join(choice(letters) for i in range(randint(10, 20)))\n        encoded_str = encode_cyclic(str)\n        assert decode_cyclic(encoded_str) == str\n\n";
+        }
+        
+        if (tasksChat && tasksChat.length > 11) {
+          tasksChat[11].moreInfo = 
+            "def encode_cyclic(s: str):\n    \"\"\"\n    returns encoded string by cycling groups of three characters.\n    \"\"\"\n    # split string to groups. Each of length 3.\n    groups = [s[(3 * i):min((3 * i + 3), len(s))] for i in range((len(s) + 2) // 3)]\n    # cycle elements in each group. Unless group has fewer elements than 3.\n    groups = [(group[1:] + group[0]) if len(group) == 3 else group for group in groups]\n    return \"\".join(groups)\n\ndef decode_cyclic(s: str):\n    \"\"\"\n    takes as input string encoded with encode_cyclic function. Returns decoded string.\n    \"\"\"\n"
+            + "\n\TESTCASE:\ndef check(candidate):\n    from random import randint, choice\n    import string\n\n    letters = string.ascii_lowercase\n    for _ in range(100):\n        str = ''.join(choice(letters) for i in range(randint(10, 20)))\n        encoded_str = encode_cyclic(str)\n        assert decode_cyclic(encoded_str) == str\n\n";
         }
 
         localStorage.setItem('free-chat-gpt', JSON.stringify(parsedData));
