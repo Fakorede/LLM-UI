@@ -1,10 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import useStore from '@store/store';
 import i18n from './i18n';
 
 import Chat from '@components/Chat';
 import Menu from '@components/Menu';
 
+import useRestoreChatFromFile from '@hooks/useRestoreChatFromFile';
 import useInitialiseNewChat from '@hooks/useInitialiseNewChat';
 import { ChatInterface } from '@type/chat';
 import { Theme } from '@type/theme';
@@ -12,12 +13,16 @@ import SessionPopup from '@components/SessionPopup';
 import Toast from '@components/Toast';
 
 function App() {
+  const restoreChatsFromFile = useRestoreChatFromFile();
   const initialiseNewChat = useInitialiseNewChat();
   const setChats = useStore((state) => state.setChats);
   const setTasks = useStore((state) => state.setTasks);
   const setTheme = useStore((state) => state.setTheme);
   const setApiKey = useStore((state) => state.setApiKey);
   const setCurrentChatIndex = useStore((state) => state.setCurrentChatIndex);
+
+  const userId = useStore((state) => state.userId);
+  const [retreivedChats, setRetreivedChats] = useState(null);
 
   useEffect(() => {
     document.documentElement.lang = i18n.language;
@@ -66,6 +71,25 @@ function App() {
       if (!chats || chats.length === 0) {
         initialiseNewChat();
       }
+
+      if (userId == "mfakor1@lsu.edu") {
+        const rawData = localStorage.getItem('free-chat-gpt')
+        if (!rawData) return;
+        const parsedData = JSON.parse(rawData);
+        let chats = parsedData?.state?.chats;
+
+        restoreChatsFromFile(userId);
+        const retreivedChats = localStorage.getItem(`${userId}.json`)
+        if (retreivedChats !== null) {
+          let parsedRetreivedData = JSON.parse(retreivedChats)
+          chats = parsedRetreivedData
+
+          localStorage.setItem('free-chat-gpt', JSON.stringify(parsedData));
+
+          setChats(chats);
+        }
+      }
+
       if (
         chats &&
         !(currentChatIndex >= 0 && currentChatIndex < chats.length)
