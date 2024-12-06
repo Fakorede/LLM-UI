@@ -5,7 +5,7 @@ const useRestoreChatFromFile = () => {
     let retreivedChats: any[] = [];
     let fileName = `${userId}.json`
 
-    await fetch(`/server/conversations/${fileName}`)
+    await fetch(`/${fileName}`)
       .then(response => response.json())
       .then(data => {
         retreivedChats = data
