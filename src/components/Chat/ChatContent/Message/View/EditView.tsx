@@ -220,7 +220,7 @@ const EditViewButtons = memo(
               }`}
               onClick={handleGenerate}
               aria-label={t('generate') as string}
-              disabled={!content || !allowChats}
+              disabled={!content || true}
             >
               <div className='flex items-center justify-center gap-2'>
                 {t('generate')}
